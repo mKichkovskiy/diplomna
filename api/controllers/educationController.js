@@ -30,6 +30,21 @@ class EducationController{
         const edu = await  Education.findOne({where: {id}},)
         return res.json(edu)
     }
+
+    async edit(req,res){
+        const id = req.params.id
+        const {level, name_univ, speciality, citi, desc, date_start, date_end} = req.body
+        const up = await Education.update(
+            {level: level, name_univ: name_univ, speciality: speciality, citi: citi, desc: desc, date_start: date_start, date_end: date_end  }
+            ,{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await Education.destroy({ where: {id}})
+        return res.json(up)
+    }
 }
 
 module.exports = new EducationController()

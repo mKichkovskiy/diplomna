@@ -34,6 +34,21 @@ class OrganisationController{
         const organisation = await  Organisation.findOne({where: {id}},)
         return res.json(organisation)
     }
+    async edit(req,res){
+        const id = req.params.id
+        const {title, type, num_of_emp, desc} = req.body
+        const {img} = req.files
+        let filename = uuid.v4() + ".jpeg"
+        img.mv(path.resolve(__dirname, '..', 'static', filename))
+        const up = await Organisation.update({title: title, type: type, num_of_emp: num_of_emp, desc: desc, img: filename },{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await Organisation.destroy({ where: {id}})
+        return res.json(up)
+    }
 }
 
 module.exports = new OrganisationController()

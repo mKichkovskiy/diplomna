@@ -28,6 +28,18 @@ class LanguageController{
         const lan = await  Language.findOne({where: {id}},)
         return res.json(lan)
     }
+    async edit(req,res){
+        const id = req.params.id
+        const {title, proficiency} = req.body
+        const up = await Language.update({title: title, proficiency: proficiency },{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await Language.destroy({ where: {id}})
+        return res.json(up)
+    }
 }
 
 module.exports = new LanguageController()

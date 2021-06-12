@@ -28,6 +28,19 @@ class PostJobController{
         const postJob = await  PostJob.findOne({where: {id}},)
         return res.json(postJob)
     }
+
+    async edit(req,res){
+        const id = req.params.id
+        const {title, salary, category, desc, location} = req.body
+        const up = await PostJob.update({title: title, salary: salary, category: category, desc: desc, location: location },{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await PostJob.destroy({ where: {id}})
+        return res.json(up)
+    }
 }
 
 module.exports = new PostJobController()

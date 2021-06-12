@@ -1,4 +1,4 @@
-const {Category, User} = require('../models/models')
+const {Category} = require('../models/models')
 
 
 class CategoryController{
@@ -15,7 +15,22 @@ class CategoryController{
     }
 
     async getOne(req, res){
+        const {id} = req.params
+        const cat = await  Category.findOne({where: {id}},)
+        return res.json(cat)
+    }
 
+    async edit(req,res){
+        const id = req.params.id
+        const {title} = req.body
+        const up = await Category.update({title: title },{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await Category.destroy({ where: {id}})
+        return res.json(up)
     }
 }
 

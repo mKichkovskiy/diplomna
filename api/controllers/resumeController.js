@@ -33,6 +33,21 @@ class ResumeController{
         const resume = await  Resume.findOne({where: {id}},)
         return res.json(resume)
     }
+    async edit(req,res){
+        const id = req.params.id
+        const {title, category, salary, location, desc, employ_type} = req.body
+        const {img} = req.files
+        let filename = uuid.v4() + ".jpeg"
+        img.mv(path.resolve(__dirname, '..', 'static', filename))
+        const up = await Resume.update({title: title, category: category, salary: salary, location: location, desc: desc, employ_type: employ_type, img: filename },{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await Resume.destroy({ where: {id}})
+        return res.json(up)
+    }
 }
 
 module.exports = new ResumeController()

@@ -28,6 +28,19 @@ class SeekerController{
         const profile = await  Profile.findOne({where: {id}},)
         return res.json(profile)
     }
+
+    async edit(req,res){
+        const id = req.params.id
+        const {full_name, birthday, citi_of_residents, phone} = req.body
+        const up = await Profile.update({ full_name: full_name, birthday: birthday, citi_of_residents: citi_of_residents, phone: phone},{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await Profile.destroy({ where: {id}})
+        return res.json(up)
+    }
 }
 
 module.exports = new SeekerController()

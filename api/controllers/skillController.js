@@ -28,6 +28,18 @@ class SkillsController{
         const skill = await  Skills.findOne({where: {id}},)
         return res.json(skill)
     }
+    async edit(req,res){
+        const id = req.params.id
+        const {title, last_used, experience, proficiency} = req.body
+        const up = await Skills.update({title: title, last_used: last_used, experience: experience, proficiency: proficiency },{where: {id}})
+        return res.json(up)
+    }
+
+    async delete(req, res){
+        const id = req.params.id
+        const up = await Skills.destroy({ where: {id}})
+        return res.json(up)
+    }
 }
 
 module.exports = new SkillsController()
