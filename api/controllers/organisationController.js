@@ -8,11 +8,12 @@ class OrganisationController{
     async create(req, res, next){
         try {
             let {title, type, num_of_emp, desc} = req.body
+            const user = req.user
             const {img} = req.files
             let filename = uuid.v4() + ".jpeg"
             img.mv(path.resolve(__dirname, '..', 'static', filename))
 
-            const organisation = await Organisation.create({title, type, num_of_emp, desc, img: filename})
+            const organisation = await Organisation.create({title, type, num_of_emp, desc, img: filename, userId: user.id})
             return res.json(organisation)
         }catch (e){
             next(ApiErr.badRequest(e.message))

@@ -24,7 +24,7 @@ const Organisation = sequelize.define('organisation',
         type: {type: DataTypes.STRING, allowNull: false},
         num_of_emp: {type: DataTypes.INTEGER, defaultValue: 0},
         desc: {type: DataTypes.STRING, defaultValue: " "},
-        rating: {type: DataTypes.INTEGER, defaultValue: 0},
+        link: {type: DataTypes.STRING, defaultValue: ""},
         img: {type: DataTypes.STRING, allowNull: false}
     }
 )
@@ -40,20 +40,13 @@ const PostJob = sequelize.define('post_job',
     }
 )
 
-const Seeker = sequelize.define('seeker',
+const Profile = sequelize.define('profile',
     {
             id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
             full_name: {type: DataTypes.STRING, allowNull: false},
             birthday: {type: DataTypes.DATEONLY, allowNull: false},
             citi_of_residents: {type: DataTypes.STRING, allowNull: false},
-            address: {type: DataTypes.STRING, allowNull: false}
-    }
-)
-
-const Numbers = sequelize.define('numbers',
-    {
-            id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-            phone_num: {type: DataTypes.STRING, allowNull: false}
+            phone: {type: DataTypes.STRING, allowNull: false}
     }
 )
 
@@ -65,7 +58,8 @@ const Resume = sequelize.define('resume',
             category: {type: DataTypes.STRING, allowNull: false},
             desc: {type: DataTypes.STRING, allowNull: false},
             salary: {type: DataTypes.INTEGER, defaultValue: 0},
-            location: {type: DataTypes.STRING, allowNull: false}
+            location: {type: DataTypes.STRING, allowNull: false},
+            employ_type: {type: DataTypes.STRING, defaultValue: ''}
     }
 )
 
@@ -82,12 +76,11 @@ const Education = sequelize.define('education',
     }
 )
 
-
-
 const Language = sequelize.define('language',
     {
             id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-            lang: {type: DataTypes.STRING, allowNull: false}
+            title: {type: DataTypes.STRING, allowNull: false},
+            proficiency: {type: DataTypes.STRING, allowNull: false}
     }
 )
 
@@ -96,18 +89,14 @@ const Skills = sequelize.define('skills',
             id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
             title: {type: DataTypes.STRING, allowNull: false},
             last_used: {type: DataTypes.STRING, allowNull: false},
-            experience: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0}
+            experience: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0},
+            proficiency: {type: DataTypes.STRING, allowNull: false}
     }
 )
 
 
-const Proficiency = sequelize.define('proficiency',
-    {
-            id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-            title: {type: DataTypes.STRING, allowNull: false}
-    }
-)
-
+User.hasMany(Category)
+Category.belongsTo(User)
 
 User.hasMany(Organisation)
 Organisation.belongsTo(User)
@@ -115,41 +104,28 @@ Organisation.belongsTo(User)
 User.hasMany(PostJob)
 PostJob.belongsTo(User)
 
-User.hasMany(Seeker)
-Seeker.belongsTo(User)
-
 User.hasMany(Resume)
 Resume.belongsTo(User)
 
-User.hasMany(Category)
-Category.belongsTo(User)
+User.hasOne(Profile)
+Profile.belongsTo(User)
 
-Organisation.hasMany(Numbers)
-Numbers.belongsTo(Organisation)
+User.hasMany(Skills)
+Skills.belongsTo(User)
 
-Seeker.hasMany(Numbers)
-Numbers.belongsTo(Seeker)
+User.hasMany(Language)
+Language.belongsTo(User)
 
-Resume.hasMany(Skills)
-Skills.belongsTo(Resume)
-
-Resume.hasMany(Language)
-Language.belongsTo(Resume)
-
-Resume.hasMany(Education)
-Education.belongsTo(Resume)
-
-
+User.hasMany(Education)
+Education.belongsTo(User)
 
 module.exports = {
     User,
     Category,
     Organisation,
-    Proficiency,
     PostJob,
     Resume,
-    Seeker,
-    Numbers,
+    Profile,
     Skills,
     Language,
     Education

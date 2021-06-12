@@ -1,9 +1,11 @@
-const {Category} = require('../models/models')
+const {Category, User} = require('../models/models')
+
 
 class CategoryController{
     async create(req, res){
         const {title} = req.body
-        const category = await Category.create({title})
+        const user = req.user
+        const category = await Category.create({title, userId: user.id})
         return res.json(category)
     }
 

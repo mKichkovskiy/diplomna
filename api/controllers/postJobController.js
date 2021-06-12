@@ -6,7 +6,8 @@ class PostJobController{
     async create(req, res, next){
         try {
             const {title, salary, category, desc, location} = req.body
-            const postJob = await PostJob.create({title, salary, category , desc, location})
+            const user = req.user
+            const postJob = await PostJob.create({title, salary, category , desc, location, userId: user.id})
             return res.json(postJob)
         }catch (e){
             next(ApiErr.badRequest(e.message))

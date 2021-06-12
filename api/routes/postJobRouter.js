@@ -1,9 +1,9 @@
 const Router = require('express')
 const router = new Router()
 const postJobController = require('../controllers/postJobController')
+const checkRole = require('../middleware/roleMiddleware')
 
-
-router.post('/',  postJobController.create)
+router.post('/',checkRole('employer'),  postJobController.create)
 router.get('/', postJobController.getAll)
 router.get('/:id', postJobController.getOne)
 
