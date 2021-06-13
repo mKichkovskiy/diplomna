@@ -1,8 +1,9 @@
 
-
-
 export default function Profile() {
     return (
-        <h1>Profile</h1>
+        <div className='main-div'>
+        <div className='cont'>
+        </div>
+        </div>
     )
 }

@@ -1,0 +1,23 @@
+.main-div {
+    background-image: url('../../img/main.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-div .cont {
+    width: 1000px;
+    height: auto;
+    margin-top: 100px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow:  0 0 10px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

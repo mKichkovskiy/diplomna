@@ -14,9 +14,7 @@ export default function Nav(){
     return (
             <div className='nav'>
                 <div className='first'>
-                    <Link to='/' style={{marginLeft:'20px'}}>
-                        <img alt='' src={Logo} />
-                    </Link>
+                    <img alt='' src={Logo} />
                     <Link to='/'  style={Style}>
                         Posts Job
                     </Link>

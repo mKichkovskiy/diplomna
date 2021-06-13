@@ -32,7 +32,7 @@ function App() {
         <Route exact path='/register' component={ Register } />
         <Route exact path='/resumes' component={ Header(Resume)} />
         <Route exact path='/organisations' component={ Header(Organisation) } />
-        <Route exact path='/profile/id' component={Header(Profile)} />
+        <Route exact path='/profile' component={Header(Profile)} />
       </Switch>
     </Router>
   );
