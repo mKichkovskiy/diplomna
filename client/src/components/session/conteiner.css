@@ -1,0 +1,25 @@
+.main {
+    background-image: url('../../img/main.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    left: 40px;
+    top: 20px;
+    position: absolute;
+}
+
+.main .child {
+    width: 300px;
+    height: auto;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    box-shadow:  0 0 10px rgba(0,0,0,0.5);
+}

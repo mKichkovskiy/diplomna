@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Main from './components/main';
+import Login from './components/session/login';
+import Register from './components/session/register';
+import Nav from './components/nav/nav';
+import Profile from './components/profile';
+import Resume from './components/resume';
+import Organisation from './components/organisation';
+
+const Header = Comp => props => {
+  return (
+    <>
+    < Nav />
+    < Comp {...props} />
+    </>
+  )
+}
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route exact path='/' component={Header(Main)} />
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={ Register } />
+        <Route exact path='/resumes' component={ Header(Resume)} />
+        <Route exact path='/organisations' component={ Header(Organisation) } />
+        <Route exact path='/profile/id' component={Header(Profile)} />
+      </Switch>
+    </Router>
   );
 }
 

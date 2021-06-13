@@ -1,0 +1,17 @@
+.login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    flex-direction: column;
+}
+
+.login .p-link{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.login .link{
+    margin-top: 20px;
+}
