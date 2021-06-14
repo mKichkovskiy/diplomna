@@ -1,10 +1,14 @@
 import './resume.css'
-import { Card, Button } from "react-bootstrap"
+import { Card, Button, InputGroup, FormControl } from "react-bootstrap"
 
 export default function Resume() {
     return (
         <div className='main-div'>
         <div className='cont'>
+        <InputGroup size="sm" className="mb-5 mt-3 pl-3 pr-3">
+            <InputGroup.Text id="inputGroup-sizing-sm">Search</InputGroup.Text>
+            <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+            </InputGroup>
   
         <Card style={{ width: '18rem' }}>
   <Card.Img variant="top" src="holder.js/100px180" />

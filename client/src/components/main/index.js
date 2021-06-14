@@ -1,8 +1,11 @@
 import './main.css'
-import React from 'react'
+import React, {useContext} from 'react'
 import {InputGroup, FormControl} from 'react-bootstrap'
 import PosrJob from '../post_job'
+import {Context} from '../../index'
+
 export default function Main(){
+  const {job} = useContext(Context)
     return (
       <div className='main-div'>
         <div className='cont'>
@@ -12,8 +15,8 @@ export default function Main(){
             <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
             </InputGroup>
             </div>
-            <h3 style={{marginBottom: '20px'}} >POsts Job</h3>
-            < PosrJob />
+            <h3 style={{marginBottom: '20px'}} >Jobs</h3>
+            {job.jobs.map( (job) => < PosrJob key={job.id} job={job} />  )}
         </div>
       </div>
     )

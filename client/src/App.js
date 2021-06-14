@@ -1,9 +1,10 @@
 import './App.css';
-
+import { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
 import Main from './components/main';
 import Login from './components/session/login';
@@ -12,6 +13,9 @@ import Nav from './components/nav/nav';
 import Profile from './components/profile';
 import Resume from './components/resume';
 import Organisation from './components/organisation';
+import Ops from './components/utils/ops';
+import { Context } from '.';
+import JobPage from './components/post_job/jobPage';
 
 const Header = Comp => props => {
   return (
@@ -24,15 +28,27 @@ const Header = Comp => props => {
 
 
 function App() {
+  const {user} = useContext(Context)
+  
+  
   return (
     <Router>
       <Switch>
+        <>
+        { !user.isAuth && (
+        <>
         <Route exact path='/' component={Header(Main)} />
-        <Route exact path='/login' component={Login} />
-        <Route exact path='/register' component={ Register } />
         <Route exact path='/resumes' component={ Header(Resume)} />
         <Route exact path='/organisations' component={ Header(Organisation) } />
         <Route exact path='/profile' component={Header(Profile)} />
+        <Route exact path='/jobs/:id' component={Header(JobPage)} />
+        </>
+        )}
+        
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/register' component={ Register } />
+
+        </>
       </Switch>
     </Router>
   );
