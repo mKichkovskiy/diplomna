@@ -1,25 +1,25 @@
 import './organisation.css'
-import { Card, Button, FormControl, InputGroup } from "react-bootstrap"
+import { Row, Card, Button, FormControl, InputGroup } from "react-bootstrap"
+import { useContext } from 'react'
+import {Context} from '../../index'
+import OrganisationItem from './organisationItem'
 
 export default function Organisation() {
+  const {job} = useContext(Context)
     return (
         <div className='main-div'>
         <div className='cont'>
+          <h1>Organisation</h1>
         <InputGroup size="sm" className="mb-5 mt-3 pl-3 pr-3">
             <InputGroup.Text id="inputGroup-sizing-sm">Search</InputGroup.Text>
             <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-            </InputGroup>
-        <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="holder.js/100px180" />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-</Card>
+        </InputGroup>
+        <Row className='d-flex'>
+            {
+              job.organisations.map((organisation) =>
+               < OrganisationItem key={organisation.id} organisation={organisation} />   
+            )}
+        </Row>
         </div>
         </div>
     )

@@ -16,6 +16,7 @@ import Organisation from './components/organisation';
 import Ops from './components/utils/ops';
 import { Context } from '.';
 import JobPage from './components/post_job/jobPage';
+import OrganisationProfile from './components/organisation/organisationProf';
 
 const Header = Comp => props => {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route exact path='/organisations' component={ Header(Organisation) } />
         <Route exact path='/profile' component={Header(Profile)} />
         <Route exact path='/jobs/:id' component={Header(JobPage)} />
+        <Route exact path='/organisations/:id' component={Header(OrganisationProfile)} />
         </>
         )}
         
