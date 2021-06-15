@@ -1,10 +1,11 @@
 import './organisation.css'
-import { Row, Card, Button, FormControl, InputGroup } from "react-bootstrap"
+import { Row, FormControl, InputGroup } from "react-bootstrap"
 import { useContext } from 'react'
 import {Context} from '../../index'
 import OrganisationItem from './organisationItem'
+import { observer } from 'mobx-react-lite'
 
-export default function Organisation() {
+ const  Organisation = observer(() => {
   const {job} = useContext(Context)
     return (
         <div className='main-div'>
@@ -23,4 +24,6 @@ export default function Organisation() {
         </div>
         </div>
     )
-}
+})
+
+export default Organisation

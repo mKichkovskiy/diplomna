@@ -6,7 +6,7 @@ const Style = {
     textDecoration: 'none',
     marginLeft: '35px',
     color: 'white',
-    fontSize: '18px'
+    fontSize: '18px',
 }
 
 
@@ -25,11 +25,20 @@ export default function Nav(){
                         Organisation
                     </Link>
                 </div>
+                
+                <div>
                 <Link to='/profile' style={{textDecoration: 'none', color: 'white'}}>
                 <div className='second'>    
                     Profile
                 </div>
                 </Link>
+                <Link to='/' style={{textDecoration: 'none', color: 'white'}}>
+                <div className='second'>
+                    Create
+                </div>
+                </Link>
+                </div>
+                
                 
             </div>
     )

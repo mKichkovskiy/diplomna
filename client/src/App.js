@@ -4,7 +4,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Redirect
 } from "react-router-dom";
 import Main from './components/main';
 import Login from './components/session/login';
@@ -13,10 +12,10 @@ import Nav from './components/nav/nav';
 import Profile from './components/profile';
 import Resume from './components/resume';
 import Organisation from './components/organisation';
-import Ops from './components/utils/ops';
 import { Context } from '.';
 import JobPage from './components/post_job/jobPage';
 import OrganisationProfile from './components/organisation/organisationProf';
+import ResumeProfile from './components/resume/resumeProfile';
 
 const Header = Comp => props => {
   return (
@@ -44,6 +43,7 @@ function App() {
         <Route exact path='/profile' component={Header(Profile)} />
         <Route exact path='/jobs/:id' component={Header(JobPage)} />
         <Route exact path='/organisations/:id' component={Header(OrganisationProfile)} />
+        <Route exact path='/resumes/:id' component={ Header(ResumeProfile) } />
         </>
         )}
         

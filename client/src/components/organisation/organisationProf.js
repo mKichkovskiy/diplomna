@@ -1,6 +1,6 @@
 
 
-import {Row, Col, Container, Image, Link } from 'react-bootstrap'
+import {Row, Col, Container, Image } from 'react-bootstrap'
 
 import LinkIcon from '../../img/www.png'
 import PersonIcon from '../../img/person.svg'
@@ -22,7 +22,7 @@ export default function OrganisationProfile(){
             <Container className='jumbotron mt-2 d-flex justify-content-center align-items-center'>
                 <Col md={3} className='d-flex justify-content-center align-items-center  '>
                     <Image alt='' width={200} height={200} src={organisation.img} />
-                    <a href={organisation.link}>
+                    <a target='_blank ' href={organisation.link}>
                     <div  style={{height: "50px", position: 'absolute', left: '10px', top: '170px'}}>
                     <Image alt='' style={{width: '60px', height: '45px'}} src={LinkIcon} />
                     </div>
@@ -41,7 +41,7 @@ export default function OrganisationProfile(){
                     <p className='text-muted'>Type: {organisation.type}</p>
                    
                     <h3>Desc:</h3>
-                    <hr class=""></hr>
+                    <hr></hr>
                     <p>{organisation.desc}</p>
                     </Row>
                 </Col>

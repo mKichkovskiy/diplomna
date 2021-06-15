@@ -4,8 +4,9 @@ import {InputGroup, FormControl, Col, Row} from 'react-bootstrap'
 import PosrJob from '../post_job'
 import {Context} from '../../index'
 import Categorys from '../category'
+import { observer } from 'mobx-react-lite'
 
-export default function Main(){
+ const Main = observer(() => {
   const {job} = useContext(Context)
     return (
       <div className='main-div'>
@@ -28,4 +29,6 @@ export default function Main(){
         </div>
       </div>
     )
-}
+})
+
+export default Main

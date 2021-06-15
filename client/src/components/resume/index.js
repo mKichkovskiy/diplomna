@@ -1,27 +1,31 @@
 import './resume.css'
-import { Card, Button, InputGroup, FormControl } from "react-bootstrap"
+import { InputGroup, FormControl, Row } from "react-bootstrap"
+import { useContext } from 'react'
 
-export default function Resume() {
+import {Context} from '../../index'
+import ResumeItem from './resumeItem'
+import { observer } from 'mobx-react-lite'
+
+ const Resume = observer(() => {
+
+    const {job} = useContext(Context)
     return (
         <div className='main-div'>
         <div className='cont'>
+          <h1>Resumes</h1>
         <InputGroup size="sm" className="mb-5 mt-3 pl-3 pr-3">
             <InputGroup.Text id="inputGroup-sizing-sm">Search</InputGroup.Text>
             <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
             </InputGroup>
-  
-        <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="holder.js/100px180" />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-</Card>
+            <Row>
+                {
+                  job.resumes.map( (resume) => < ResumeItem key={resume.id} resume={resume} />   )
+                }
+            </Row>
         </div>
         </div>
     )
-}
+})
+
+
+export default Resume

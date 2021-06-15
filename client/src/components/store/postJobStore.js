@@ -81,6 +81,102 @@ export default class JobStore {
             }
         ]
 
+        this._resumes = [
+            {
+                id: 1,
+                title: 'Project manager',
+                img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                category: 'It',
+                desc: 'hellow sir',
+                salary: '1000$',
+                location: 'Lviv',
+                employ_type: 'full-time'
+            },
+            {
+                id: 2,
+                title: 'Project manager',
+                img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                category: 'It',
+                desc: 'hellow sir',
+                salary: '1000$',
+                location: 'Lviv',
+                employ_type: 'full-time'
+            },
+            {
+                id: 3,
+                title: 'Project manager',
+                img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                category: 'It',
+                desc: 'hellow sir',
+                salary: '1000$',
+                location: 'Lviv',
+                employ_type: 'full-time'
+            },
+            {
+                id: 4,
+                title: 'Project manager',
+                img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                category: 'It',
+                desc: 'hellow sir',
+                salary: '1000$',
+                location: 'Lviv',
+                employ_type: 'full-time'
+            },
+            {
+                id: 5,
+                title: 'Project manager',
+                img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                category: 'It',
+                desc: 'hellow sir',
+                salary: '1000$',
+                location: 'Lviv',
+                employ_type: 'full-time'
+            },
+            {
+                id: 6,
+                title: 'Project manager',
+                img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                category: 'It',
+                desc: 'hellow sir',
+                salary: '1000$',
+                location: 'Lviv',
+                employ_type: 'full-time'
+            },
+
+
+        ]
+
+        this._employment = [
+            {
+                id: 1,
+                title: 'Full-time'
+            },
+            {
+                id: 2,
+                title: 'Part-time'
+            },
+            {
+                id: 3,
+                title: 'Temporary'
+            },
+            {
+                id: 4,
+                title: 'Seasonal'
+            },
+            {
+                id: 5,
+                title: 'Freelance'
+            },
+            {
+                id: 6,
+                title: 'Consultants'
+            },
+            {
+                id: 7,
+                title: 'Temporary workers'
+            },
+        ]
+
         this._selectedCategory = {}
         makeAutoObservable(this)
     }
@@ -94,6 +190,25 @@ export default class JobStore {
     get jobs(){
         return this._jobs
     }
+
+
+    setEmployments(employment){
+        this._jobs = employment
+    }
+
+    get employments(){
+        return this._employment
+    }
+
+
+    setResumes(resumes){
+        this._resumes = resumes
+    }
+
+    get resumes(){
+        return this._resumes
+    }
+
 
     setOrganisation(org){
         this._organisation = org
