@@ -1,5 +1,5 @@
 import './App.css';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,6 +16,9 @@ import { Context } from '.';
 import JobPage from './components/post_job/jobPage';
 import OrganisationProfile from './components/organisation/organisationProf';
 import ResumeProfile from './components/resume/resumeProfile';
+import { observer } from 'mobx-react-lite';
+import { check } from './http/userApi';
+import { Spinner } from 'react-bootstrap';
 
 const Header = Comp => props => {
   return (
@@ -27,15 +30,32 @@ const Header = Comp => props => {
 }
 
 
-function App() {
+const App = observer(() => {
   const {user} = useContext(Context)
+  const [loading, setLoading] = useState(true)
   
-  
+  useEffect(() => {
+    setTimeout( () => {
+      check()
+      .then(data => {
+        user.setUser(data)
+        user.setIsAuth(true)
+      }).finally(() => setLoading(false) ).catch(e =>{ console.log(e.message ) 
+        alert('Unauthorized!!!')})
+    }, 2000 )
+
+  }, [])
+
+  if(loading){
+    return <div style={{marginTop: '500px', display: 'flex', justifyContent: 'center', alignItems:'center'}}><Spinner animation='border' variant="warning" /></div>
+  }
+
+
   return (
     <Router>
       <Switch>
         <>
-        { !user.isAuth && (
+        { user.isAuth && (
         <>
         <Route exact path='/' component={Header(Main)} />
         <Route exact path='/resumes' component={ Header(Resume)} />
@@ -54,6 +74,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+})
 
 export default App;

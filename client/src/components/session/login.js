@@ -1,17 +1,38 @@
 import  Conteiner  from './conteiner'
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import {Form, Button} from 'react-bootstrap'
 import './login.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import {Context} from '../../index'
+import { login } from '../../http/userApi'
+import { observer } from 'mobx-react-lite'
 
-export default function Login(){
+
+const Login = observer(() => {
+    const history = useHistory()
+    const {user} = useContext(Context)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const click = async () =>{
+        try{            
+        const response = await login(email, password)
+        user.setUser(response)
+        user.setIsAuth(true)
+        history.push('/')
+        }catch(e){
+            alert(e.response.data.message)
+        }
+    }
+
+
     return (
         <Conteiner>
             <div className='login'>
             <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" value={email} onChange={e => setEmail(e.target.value)}  placeholder="Enter email" />
             <Form.Text className="text-muted">
                 We'll never share your email with anyone else.
             </Form.Text>
@@ -19,10 +40,10 @@ export default function Login(){
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Control type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
             </Form.Group>
             <div style={{textAlign: 'center'}}>
-                <Button variant="primary" type="submit">
+                <Button variant="primary" onClick={click}>
                     Login
                 </Button>
             </div>
@@ -34,4 +55,7 @@ export default function Login(){
             </div>
         </Conteiner>
     )
-}
+})
+
+
+export default Login

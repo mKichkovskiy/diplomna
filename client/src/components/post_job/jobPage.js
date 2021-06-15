@@ -1,18 +1,17 @@
 
 
+import { useEffect, useState } from 'react'
 import {Col, Container, Badge} from 'react-bootstrap'
 import BackButton from '../utils/backB'
-
+import { useParams } from 'react-router'
+import { fetchJobOne } from '../../http/jobApi'
 
 export default function JobPage(){
-    const job = {
-        id: 1,
-        title: "reac dev",
-        salary: '300$',
-        location: 'Uzhgorod',
-        desc: 'lorem10',
-        category: "It"
-    }
+    const [job, setInfo] = useState({})
+    const {id} = useParams()
+    useEffect(() => {
+        fetchJobOne(id).then(res => setInfo(res) )
+    },[])
 
     return (
         <div className='main-div'>

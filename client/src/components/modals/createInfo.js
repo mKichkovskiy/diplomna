@@ -13,7 +13,7 @@ const CreateInfo = ({onHide, show}) => {
             >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                Create Resume
+                Profile
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

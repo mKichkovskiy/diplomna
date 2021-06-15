@@ -4,6 +4,9 @@
 import {Row, Col, Container, Image, Badge } from 'react-bootstrap'
 import BackButton from '../utils/backB'
 import LocationIcon from '../../img/location.png'
+import EduItem from '../education'
+import LangItem from '../language/langItem'
+import SkillItem from '../skills'
 
 export default function ResumeProfile(){
 
@@ -18,8 +21,78 @@ export default function ResumeProfile(){
         employ_type: 'full-time'
     }
 
+    const lang = [
+        {
+          id: 1,
+          title: 'eng',
+          proficiency: 'b1'
+          
+        },
+        {
+            id: 2,
+            title: 'eng',
+            proficiency: 'b1'
+          
+        }, 
+        {
+            id: 3,
+            title: 'eng',
+            proficiency: 'b1'
+          
+        }
+      ]
+
+      const skills = [
+        {
+          id: 1,
+          title: 'eng',
+          experience: '1yerr'
+          
+        },
+        {
+            id: 2,
+            title: 'eng',
+            experience: 'b1'
+          
+        }, 
+        {
+            id: 3,
+            title: 'eng',
+            experience: 'b1'
+          
+        }
+      ]
+
+      const edu = [
+        {
+          id: 1,
+          name_univ: 'qqweqwe',
+          citi: 'qwe',
+          speciality: 'asdas',
+          level: '112'
+          
+        },
+        {
+          id: 2,
+          name_univ: 'qqweqwe',
+          citi: 'qwe',
+          speciality: 'asdas',
+          level: '112'
+          
+        }, 
+        {
+          id: 3,
+          name_univ: 'qqweqwe',
+          citi: 'qwe',
+          speciality: 'asdas',
+          level: '112'
+          
+        }
+      ]
+
     return (
         <div className='main-div'>
+            <Container>
             <Container className='jumbotron mt-2 d-flex justify-content-center align-items-center'>
             <Col md={3} className='d-flex justify-content-center align-items-center  '>
                     <Image alt='' className='rounded-circle'  width={200} height={200} src={resume.img} />
@@ -48,6 +121,35 @@ export default function ResumeProfile(){
                     <p>{resume.desc}</p>
                     </Row>
                     </Col>
+                
+            </Container>
+            <Container className='jumbotron mt-2 d-flex'>
+            
+            <Container  >
+            <h5 className='text-primary'>Education</h5>
+            <Row className='bg-secondary rounded'>
+                {
+                  edu.map((ed) => < EduItem key={ed.id} edu={ed} />  )
+                }
+            </Row>
+            </Container>
+            <Container>
+            <h5 className='text-primary'>Languages</h5>
+            <Row className='bg-success rounded'>
+            {
+                  lang.map((ed) => < LangItem key={ed.id} lang={ed} />  )
+                }
+            </Row>
+            </Container>
+            <Container>
+            <h5 className='text-primary'>Skills</h5>
+            <Row className='bg-secondary rounded'>
+            {
+                  skills.map((ed) => <  SkillItem key={ed.id} skill={ed} />  )
+                }
+            </Row>
+            </Container>
+            </Container>
             </Container>
         </div>
     )

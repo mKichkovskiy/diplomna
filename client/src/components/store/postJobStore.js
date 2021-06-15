@@ -2,32 +2,7 @@ import {makeAutoObservable} from 'mobx'
 
 export default class JobStore {
     constructor(){
-        this._jobs = [
-            {
-                id: 1,
-                category: 'it',
-                title: ' react dev',
-                des: 'ssssadwdq',
-                salary: '400$',
-                location: 'Uzhgorod',
-            },
-            {
-                id: 2,
-                category: 'it',
-                title: 'junior react dev',
-                des: 'ssssadwdq',
-                salary: '300$',
-                location: 'Kyiv',
-            },
-            {
-                id: 3,
-                category: 'it',
-                title: 'Java developer',
-                des: 'ssssadwdq',
-                salary: '340$',
-                location: 'Uzhgorod',
-            }
-        ]
+        this._jobs = []
         this._categorys = [
             {
                 id: 1,

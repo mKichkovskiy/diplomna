@@ -16,7 +16,7 @@ const CreateOrg = ({onHide, show}) => {
             >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                Create Resume
+                Organisation
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

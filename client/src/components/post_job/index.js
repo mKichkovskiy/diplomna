@@ -1,9 +1,10 @@
 
 
+import { observer } from "mobx-react-lite"
 import { Card, Col } from "react-bootstrap"
 import { useHistory } from "react-router"
 
-export default function PosrJob({job}){
+const PosrJob = observer(({job}) =>{
     const history = useHistory()
     
     return (
@@ -17,4 +18,6 @@ export default function PosrJob({job}){
     </Card>
         </Col>
     )
-}
+})
+
+export default PosrJob

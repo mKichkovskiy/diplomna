@@ -26,19 +26,11 @@ export default function Nav(){
                     </Link>
                 </div>
                 
-                <div>
                 <Link to='/profile' style={{textDecoration: 'none', color: 'white'}}>
                 <div className='second'>    
                     Profile
                 </div>
-                </Link>
-                <Link to='/' style={{textDecoration: 'none', color: 'white'}}>
-                <div className='second'>
-                    Create
-                </div>
-                </Link>
-                </div>
-                
+               </Link>
                 
             </div>
     )

@@ -1,12 +1,42 @@
 
-import { useContext } from "react"
-import { Modal, Button, Form, Dropdown } from "react-bootstrap"
+import { useContext, useState } from "react"
+import { Modal, Button, Form, Dropdown, Row, Col } from "react-bootstrap"
 import {Context} from '../../index'
 
 const CreateResume = ( {show, onHide}) => {
 
+
     const {job} = useContext(Context)
+  
+    const [Skill, setSkill] = useState([])
+    const [Edu, setEdu] = useState([])
+    const [Lang, setLang] = useState([])
     
+    const addLag = () => {
+        setLang([...Lang, {title: '', proficiency: ''  , number: Date.now()}])
+    }
+
+    const RemoveLag = (number) => {
+      setLang(Lang.filter(e => e.number !== number))
+  }
+
+  const addEdu = () => {
+    setEdu([...Edu, {name_univ: '' , speciality: '', level: '' , number: Date.now()}])
+}
+
+const RemoveEdu = (number) => {
+  setEdu(Edu.filter(e => e.number !== number))
+}
+
+const addSkill = () => {
+  setSkill([...Skill, {title: '', experience: '' , number: Date.now()}])
+}
+
+const RemoveSkill = (number) => {
+setSkill(Skill.filter(e => e.number !== number))
+}
+
+
     return (
         <>
            <Modal
@@ -58,6 +88,74 @@ const CreateResume = ( {show, onHide}) => {
               }
             </Dropdown.Menu>
           </Dropdown>
+          <Button
+          variant='outline-success'
+          onClick={addLag}
+          >
+            Add language
+          </Button>
+          <Button
+          variant='outline-success'
+          onClick={addEdu}
+          >
+            Add Education
+          </Button>
+          <Button
+          variant='outline-success'
+          onClick={addSkill}
+          >
+            Add Skill
+          </Button>
+          {
+            Lang.map( e => 
+              <Row className='mt-4' key={e.number}>
+                <Col md={4}>
+                  <Form.Control placeholder='title lang' />
+                </Col>
+                <Col md={4}>
+                <Form.Control placeholder='profience lang' />
+                </Col>
+                <Col>
+                  <Button onClick={() => RemoveLag(e.number) } variant='outline-danger'>Delete</Button>
+                </Col>
+              </Row>
+              )
+          }
+         
+          {
+            Skill.map( e => 
+              <Row className='mt-4' key={e.number}>
+                <Col md={4}>
+                  <Form.Control placeholder='title skill' />
+                </Col>
+                <Col md={4}>
+                <Form.Control placeholder='expirience skill' />
+                </Col>
+                <Col>
+                  <Button onClick={() => RemoveSkill(e.number) } variant='outline-danger'>Delete</Button>
+                </Col>
+              </Row>
+              )
+          }
+         
+          {
+            Edu.map( e => 
+              <Row className='mt-4' key={e.number}>
+                <Col md={4}>
+                  <Form.Control placeholder='name of univer' />
+                </Col>
+                <Col md={4}>
+                <Form.Control placeholder='speciality' />
+                </Col>
+                <Col md={4}>
+                <Form.Control placeholder='level' />
+                </Col>
+                <Col className='mt-2'>
+                  <Button  onClick={() => RemoveEdu(e.number) } variant='outline-danger'>Delete</Button>
+                </Col>
+              </Row>
+              )
+          }
           </Form>
       </Modal.Body>
       <Modal.Footer>
