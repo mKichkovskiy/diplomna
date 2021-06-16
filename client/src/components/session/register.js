@@ -44,9 +44,10 @@ const Register = observer(() =>{
             value={password} onChange={e => setPassword(e.target.value) } type='password' />
             </Form.Group>
             <Form.Label>Chose your role:</Form.Label>
-            <Form.Control as="select"  value={role} onChange={ e => setRole(e.target.value)}  className="mb-3">
-               <option value='seeker' >Seeker</option>
+            <Form.Control as="select"   value={role} onChange={ e => setRole(e.target.value)}  className="mb-3">
+               <option>Roles...</option>
                <option value='employer' >Employer</option>
+               <option value='seeker' >Seeker</option>
             </Form.Control>
            
             <div style={{textAlign: 'center'}}>

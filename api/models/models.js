@@ -56,9 +56,9 @@ const Resume = sequelize.define('resume',
             title: {type: DataTypes.STRING, allowNull: false},
             img: {type: DataTypes.STRING, allowNull: false},
             category: {type: DataTypes.STRING, allowNull: false},
-            desc: {type: DataTypes.STRING, allowNull: false},
+            desc: {type: DataTypes.STRING, allowNull: false, defaultValue: ''},
             salary: {type: DataTypes.INTEGER, defaultValue: 0},
-            location: {type: DataTypes.STRING, allowNull: false},
+            location: {type: DataTypes.STRING, allowNull: false, defaultValue: ''},
             employ_type: {type: DataTypes.STRING, defaultValue: ''}
     }
 )
@@ -66,13 +66,10 @@ const Resume = sequelize.define('resume',
 const Education = sequelize.define('education',
     {
             id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-            level: {type: DataTypes.STRING, allowNull: false},
-            name_univ: {type: DataTypes.STRING, allowNull: false},
-            speciality: {type: DataTypes.STRING, allowNull: false},
-            citi: {type: DataTypes.STRING, allowNull: false},
-            desc: {type: DataTypes.STRING, defaultValue: ""},
-            date_start: {type: DataTypes.DATEONLY, allowNull: false},
-            date_end: {type: DataTypes.DATEONLY, allowNull: false}
+            level: {type: DataTypes.STRING, defaultValue: '', allowNull: ''},
+            name_univ: {type: DataTypes.STRING, allowNull: false, allowNull: ''},
+            speciality: {type: DataTypes.STRING, allowNull: false, allowNull: ''},
+            citi: {type: DataTypes.STRING, defaultValue: ''},
     }
 )
 
@@ -87,10 +84,10 @@ const Language = sequelize.define('language',
 const Skills = sequelize.define('skills',
     {
             id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-            title: {type: DataTypes.STRING, allowNull: false},
-            last_used: {type: DataTypes.STRING, allowNull: false},
+            title: {type: DataTypes.STRING, defaultValue: ''},
+            last_used: {type: DataTypes.STRING, defaultValue: ''},
             experience: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0},
-            proficiency: {type: DataTypes.STRING, allowNull: false}
+            proficiency: {type: DataTypes.STRING, defaultValue: ''}
     }
 )
 
@@ -110,13 +107,13 @@ Resume.belongsTo(User)
 User.hasOne(Profile)
 Profile.belongsTo(User)
 
-User.hasMany(Skills)
+Resume.hasMany(Skills, {as: 'skills'})
 Skills.belongsTo(User)
 
-User.hasMany(Language)
+Resume.hasMany(Language, {as: 'langs'})
 Language.belongsTo(User)
 
-User.hasMany(Education)
+Resume.hasMany(Education, {as: 'edus'})
 Education.belongsTo(User)
 
 module.exports = {

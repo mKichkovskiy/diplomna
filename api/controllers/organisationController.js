@@ -7,13 +7,13 @@ const ApiErr = require('../error/apiErr')
 class OrganisationController{
     async create(req, res, next){
         try {
-            let {title, type, num_of_emp, desc} = req.body
+            let {title, type, num_of_emp, desc, link} = req.body
             const user = req.user
             const {img} = req.files
             let filename = uuid.v4() + ".jpeg"
             img.mv(path.resolve(__dirname, '..', 'static', filename))
 
-            const organisation = await Organisation.create({title, type, num_of_emp, desc, img: filename, userId: user.id})
+            const organisation = await Organisation.create({title, type, num_of_emp, desc,link, img: filename, userId: user.id})
             return res.json(organisation)
         }catch (e){
             next(ApiErr.badRequest(e.message))
@@ -31,7 +31,7 @@ class OrganisationController{
 
     async getOne(req, res){
         const {id} = req.params
-        const organisation = await  Organisation.findOne({where: {id}},)
+        const organisation = await  Organisation.findOne({where: {id}})
         return res.json(organisation)
     }
     async edit(req,res){

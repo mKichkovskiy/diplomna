@@ -25,7 +25,7 @@ class SeekerController{
 
     async getOne(req, res){
         const {id} = req.params
-        const profile = await  Profile.findOne({where: {id}},)
+        const profile = await  Profile.findOne({where: {userId: id}},)
         return res.json(profile)
     }
 

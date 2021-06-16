@@ -1,101 +1,47 @@
 
 
 
-import {Row, Col, Container, Image, Badge } from 'react-bootstrap'
+import {Row, Col, Container, Image, Badge, Button } from 'react-bootstrap'
 import BackButton from '../utils/backB'
 import LocationIcon from '../../img/location.png'
 import EduItem from '../education'
 import LangItem from '../language/langItem'
 import SkillItem from '../skills'
+import { useEffect, useState, useContext } from 'react'
+import { useParams, useHistory } from 'react-router'
+import { observer } from 'mobx-react-lite'
+import { deleteRes, fetchResOne } from '../../http/resumeApi'
+import {Context} from '../../index'
 
-export default function ResumeProfile(){
 
-    const resume = {
-        id: 1,
-        title: 'Project manager',
-        img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-        category: 'It',
-        desc: 'hellow sir',
-        salary: '1000$',
-        location: 'Lviv',
-        employ_type: 'full-time'
+ const ResumeProfile = observer(() =>{
+  const {user} = useContext(Context)
+    const {id} = useParams()
+    const [resume, setResume] = useState({skills: [], langs: [], edus: []})
+    const history = useHistory()
+
+
+    useEffect(
+      ()=> {
+        fetchResOne(id).then(res => {setResume(res)
+        
+      })
+    }, [])
+
+    const token = localStorage.getItem('token')
+    const deleteR = () =>{
+        deleteRes(id, token).then( res => {
+            history.push('/resumes')
+            alert('Deleted!')
+        })
     }
-
-    const lang = [
-        {
-          id: 1,
-          title: 'eng',
-          proficiency: 'b1'
-          
-        },
-        {
-            id: 2,
-            title: 'eng',
-            proficiency: 'b1'
-          
-        }, 
-        {
-            id: 3,
-            title: 'eng',
-            proficiency: 'b1'
-          
-        }
-      ]
-
-      const skills = [
-        {
-          id: 1,
-          title: 'eng',
-          experience: '1yerr'
-          
-        },
-        {
-            id: 2,
-            title: 'eng',
-            experience: 'b1'
-          
-        }, 
-        {
-            id: 3,
-            title: 'eng',
-            experience: 'b1'
-          
-        }
-      ]
-
-      const edu = [
-        {
-          id: 1,
-          name_univ: 'qqweqwe',
-          citi: 'qwe',
-          speciality: 'asdas',
-          level: '112'
-          
-        },
-        {
-          id: 2,
-          name_univ: 'qqweqwe',
-          citi: 'qwe',
-          speciality: 'asdas',
-          level: '112'
-          
-        }, 
-        {
-          id: 3,
-          name_univ: 'qqweqwe',
-          citi: 'qwe',
-          speciality: 'asdas',
-          level: '112'
-          
-        }
-      ]
 
     return (
         <div className='main-div'>
             <Container>
             <Container className='jumbotron mt-2 d-flex justify-content-center align-items-center'>
             <Col md={3} className='d-flex justify-content-center align-items-center  '>
-                    <Image alt='' className='rounded-circle'  width={200} height={200} src={resume.img} />
+                    <Image alt='' className='rounded-circle'  width={200} height={200} src={process.env.REACT_APP_API_URL + resume.img} />
                     
                     <div  style={{display: 'flex', alignItems: 'center',  height: "50px", position: 'absolute', left: '10px', top: '190px'}}>
                         <Image alt='' src={LocationIcon} />
@@ -105,6 +51,24 @@ export default function ResumeProfile(){
                 <Col md={8} >
                 <div style={{position: 'absolute', top: '10px', right: '20px'}}>
                     <BackButton />
+                    {
+                    user.User.id !== resume.userId ? (
+                        <Button
+                        className='ml-3 btn-lg'
+                        disabled={true}
+                >
+                    Delete
+                </Button>
+                    ) : (
+                        <Button
+                        className='ml-3 btn-lg'
+                        disabled={false}
+                onClick={deleteR}
+                >
+                    Delete
+                </Button>
+                    )
+                }
                 </div>
                     <Row>
                     <h1>{resume.title}</h1>
@@ -129,7 +93,7 @@ export default function ResumeProfile(){
             <h5 className='text-primary'>Education</h5>
             <Row className='bg-secondary rounded'>
                 {
-                  edu.map((ed) => < EduItem key={ed.id} edu={ed} />  )
+                  resume.edus.map((ed) => < EduItem key={ed.id} edu={ed} />  )
                 }
             </Row>
             </Container>
@@ -137,7 +101,7 @@ export default function ResumeProfile(){
             <h5 className='text-primary'>Languages</h5>
             <Row className='bg-success rounded'>
             {
-                  lang.map((ed) => < LangItem key={ed.id} lang={ed} />  )
+                  resume.langs.map((ed) => < LangItem key={ed.id} lang={ed} />  )
                 }
             </Row>
             </Container>
@@ -145,12 +109,16 @@ export default function ResumeProfile(){
             <h5 className='text-primary'>Skills</h5>
             <Row className='bg-secondary rounded'>
             {
-                  skills.map((ed) => <  SkillItem key={ed.id} skill={ed} />  )
-                }
+                 resume.skills.map((ed) => <  SkillItem key={ed.id} skill={ed} />  )
+            }
             </Row>
             </Container>
             </Container>
             </Container>
         </div>
     )
-}
+})
+
+
+
+export default ResumeProfile

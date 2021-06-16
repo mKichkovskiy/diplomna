@@ -12,6 +12,7 @@ import CreateOrg from '../modals/createOrg'
 
 
 const Profile = observer(() => {
+    
     const [ResumeVisible, setResumeVisible] = useState(false)
     const [JobVisible, setJobVisible] = useState(false)
     const [OrgVisible, setOrgVisible] = useState(false)
@@ -23,6 +24,7 @@ const Profile = observer(() => {
         localStorage.clear()
         history.push('/login')
     }
+    
     
     return (
         <div className='main-div'>

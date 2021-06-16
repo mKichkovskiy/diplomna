@@ -1,18 +1,29 @@
 
 
-import { useEffect, useState } from 'react'
-import {Col, Container, Badge} from 'react-bootstrap'
+import { useEffect, useState, useContext } from 'react'
+import {Col, Container, Badge, Button} from 'react-bootstrap'
 import BackButton from '../utils/backB'
-import { useParams } from 'react-router'
-import { fetchJobOne } from '../../http/jobApi'
+import { useParams, useHistory } from 'react-router'
+import { deleteJobs, fetchJobOne } from '../../http/jobApi'
+import {Context} from '../../index'
+import { observer } from 'mobx-react-lite'
 
-export default function JobPage(){
+const JobPage = observer(() =>{
+    const {user} = useContext(Context)
     const [job, setInfo] = useState({})
     const {id} = useParams()
+    const history = useHistory()
+    
     useEffect(() => {
         fetchJobOne(id).then(res => setInfo(res) )
     },[])
-
+    const token = localStorage.getItem('token')
+    const deleteJ = () =>{
+        deleteJobs(id, token).then( res => {
+            history.push('/')
+            alert('Deleted!')
+        })
+    }
     return (
         <div className='main-div'>
             <Container className='jumbotron mt-5  rounded'>
@@ -32,11 +43,32 @@ export default function JobPage(){
                 <Col>
                     <p>{job.desc}</p>
                 </Col>
-                <div style={{position: 'absolute', top: '330px', right: '420px'}}>
+                <div style={{position: 'absolute', top: '230px', right: '250px'}}>
                 < BackButton />
+                {
+                    user.User.id !== job.userId ? (
+                        <Button
+                        className='ml-3 btn-lg'
+                        disabled={true}
+                >
+                    Delete
+                </Button>
+                    ) : (
+                        <Button
+                        className='ml-3 btn-lg'
+                        disabled={false}
+                onClick={deleteJ}
+                >
+                    Delete
+                </Button>
+                    )
+                }
                 </div>
                 
             </Container>
         </div>
     )
-}
+})
+
+
+export default JobPage
